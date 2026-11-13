@@ -1437,7 +1437,7 @@ function drawFx(dt){
 
 /* ---------------- game state ---------------- */
 let state='intro', tStart=0, lastT=performance.now(), pct=0, goldFound=false, lastTick=-1, ended=false;
-const DUR=10; const TUNE=Object.assign({tA1:.065,tA2:.042,sA1:.02,sA2:.012,sAG:.25,tR:19,sR:34,sMs:2500,vmax:2}); const TOW_R=TUNE.tR, SPR_R=TUNE.sR, SPRAY_MS=TUNE.sMs; let speedK=1, lastLineT=0, lastFastWarn=0;
+const DUR=10; const TUNE=Object.assign({tA1:.12,tA2:.078,sA1:.02,sA2:.012,sAG:.25,tR:24,sR:34,sMs:2500,vmax:2}); const TOW_R=TUNE.tR, SPR_R=TUNE.sR, SPRAY_MS=TUNE.sMs; let speedK=1, lastLineT=0, lastFastWarn=0;
 function toImg(x,y){ return [(x-ox)/sc, (y-oy)/sc]; }
 let last=null, travel=0, lastScrubSnd=0, lastVib=0, lastWord=0, scrubbedSince=0;
 let tool='mitt', lastGoldWarn=0;
@@ -1602,7 +1602,7 @@ function showResult(withScore){
   $('#scoreWrap').hidden=!withScore; $('#welcome').hidden=withScore;
   if(withScore){
     const r=RANKS.find(r=>pct>=r.min);
-    const bBase=pct*10, bGold=goldFound?300:0, bTime=pct>=99?Math.round(finLeft*100):0, bCombo=comboMax*10, total=bBase+bGold+bTime+bCombo;
+    const bBase=pct*10, bGold=goldFound?300:0, bTime=pct>=99?Math.round(finLeft*300):0, bCombo=comboMax*10, total=bBase+bGold+bTime+bCombo;
     lastScore={pct, rank:r.name, score:total, bd:{base:bBase,gold:bGold,time:bTime,combo:bCombo}}; window.__lastScore=lastScore;
     { const pe=$('#rPts'); const t1=performance.now(); (function c2(n){ const k=Math.min(1,(n-t1)/1300); pe.firstChild.nodeValue=Math.round(total*(1-Math.pow(1-k,3))).toLocaleString('ko-KR'); if(k<1) requestAnimationFrame(c2); })(t1);
       $('#rBreak').innerHTML='<span>제거 <b>'+bBase.toLocaleString('ko-KR')+'</b></span><span>콤보 <b>'+bCombo.toLocaleString('ko-KR')+'</b></span><span>황금 치석 <b>'+bGold+'</b></span><span>시간 <b>'+bTime.toLocaleString('ko-KR')+'</b></span>'; }
